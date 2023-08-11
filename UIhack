@@ -1,232 +1,118 @@
-_G.AutoFarmBounty = true
+-- Instances
 
-spawn(function()
-    pcall(function()
-        game:GetService("RunService").RenderStepped:connect(function()
-            if _G.AutoFarmBounty and TargetPlayerAim ~= nil and game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool") and game.Players.LocalPlayer.Character[game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool").Name]:FindFirstChild("MousePos") then
-                local args = {
-                    [1] = game:GetService("Players"):FindFirstChild(TargetPlayerAim).Character.HumanoidRootPart.Position
-                }
-                game:GetService("Players").LocalPlayer.Character[game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool").Name].RemoteEvent:FireServer(unpack(args))
-            end
-        end)
-    end)
-end)
-
-
-spawn(function()
-pcall(function()
-if _G.AutoFarmBounty then
-while wait() do
-if game.Players.LocalPlayer.Character.Humanoid.Health > 0 then
-game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetSpawnPoint")
-end
-end
-end
-end)
-end)
-
-	function Tween(P1)
-		Distance = (P1.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
-		if Distance < 250 then
-			Speed = 600
-		elseif Distance < 500 then
-			Speed = 400
-		elseif Distance < 1000 then
-			Speed = 350
-		elseif Distance >= 1000 then
-			Speed = 200
-		end
-		game:GetService("TweenService"):Create(
-			game.Players.LocalPlayer.Character.HumanoidRootPart,
-			TweenInfo.new(Distance/Speed, Enum.EasingStyle.Linear),
-			{CFrame = P1}
-		):Play()
+local MainUI = Instance.new("ScreenGui")
+local Main = Instance.new("Frame")
+local Time_2 = Instance.new("TextLabel")
+local BountyHunted = Instance.new("TextLabel")
+local Logo = Instance.new("ImageLabel")
+local UICorner = Instance.new("UICorner")
+local UICorner_2 = Instance.new("UICorner")
+local HUBname = Instance.new("TextLabel")
+local T = Instance.new("TextLabel")
+ 
+-- Properties
+ 
+MainUI.Name = "MainUI"
+ 
+MainUI.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+MainUI.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+MainUI.ResetOnSpawn = false
+ 
+Main.Name = "Main"
+Main.Parent = MainUI
+Main.BackgroundColor3 = Color3.new(1, 1, 1)
+Main.BorderColor3 = Color3.new(0, 0, 0)
+Main.BorderSizePixel = 0
+Main.Position = UDim2.new(0.402698278, 0, 0.274784476, 0)
+Main.Size = UDim2.new(0, 200, 0, 250)
+Main.Active = true
+Main.Draggable = true
+ 
+Time_2.Name = "Time"
+Time_2.Parent = Main
+Time_2.BackgroundColor3 = Color3.new(1, 1, 1)
+Time_2.BackgroundTransparency = 1
+Time_2.BorderColor3 = Color3.new(0, 0, 0)
+Time_2.BorderSizePixel = 0
+Time_2.Position = UDim2.new(0.0250000004, 0, 0.708000004, 0)
+Time_2.Size = UDim2.new(0, 190, 0, 36)
+Time_2.Font = Enum.Font.SourceSans
+Time_2.Text = "Time Elapsed: 60H 60M 60S"
+Time_2.TextColor3 = Color3.new(0, 0, 0)
+Time_2.TextSize = 20
+ 
+BountyHunted.Name = "BountyHunted"
+BountyHunted.Parent = Main
+BountyHunted.BackgroundColor3 = Color3.new(1, 1, 1)
+BountyHunted.BackgroundTransparency = 1
+BountyHunted.BorderColor3 = Color3.new(0, 0, 0)
+BountyHunted.BorderSizePixel = 0
+BountyHunted.Position = UDim2.new(-0.00131576543, 0, 0.850000024, 0)
+BountyHunted.Size = UDim2.new(0, 200, 0, 36)
+BountyHunted.Font = Enum.Font.SourceSans
+BountyHunted.Text = "Bounty Hunted: 0000"
+BountyHunted.TextColor3 = Color3.new(0, 0, 0)
+BountyHunted.TextSize = 20
+ 
+Logo.Name = "Logo"
+Logo.Parent = Main
+Logo.BackgroundColor3 = Color3.new(1, 1, 1)
+Logo.BorderColor3 = Color3.new(0, 0, 0)
+Logo.BorderSizePixel = 0
+Logo.Position = UDim2.new(0, 0, -0.34799999, 0)
+Logo.Size = UDim2.new(0, 200, 0, 200)
+Logo.Image = "rbxassetid://14384647314"
+ 
+UICorner.Parent = Logo
+ 
+UICorner_2.Parent = Main
+ 
+HUBname.Name = "HUBname"
+HUBname.Parent = Main
+HUBname.BackgroundColor3 = Color3.new(1, 1, 1)
+HUBname.BackgroundTransparency = 1
+HUBname.BorderColor3 = Color3.new(0, 0, 0)
+HUBname.BorderSizePixel = 0
+HUBname.Position = UDim2.new(-0.00131576543, 0, 0.451999992, 0)
+HUBname.Size = UDim2.new(0, 200, 0, 30)
+HUBname.Font = Enum.Font.SourceSans
+HUBname.Text = "LAZZY HUB"
+HUBname.TextColor3 = Color3.new(0, 0, 0)
+HUBname.TextSize = 30
+ 
+T.Name = "T"
+T.Parent = Main
+T.BackgroundColor3 = Color3.new(1, 1, 1)
+T.BackgroundTransparency = 1
+T.BorderColor3 = Color3.new(0, 0, 0)
+T.BorderSizePixel = 0
+T.Position = UDim2.new(-0.00131576543, 0, 0.572000027, 0)
+T.Size = UDim2.new(0, 200, 0, 18)
+T.Font = Enum.Font.SourceSans
+T.Text = "Auto Bounty"
+T.TextColor3 = Color3.new(0, 0, 0)
+T.TextSize = 20
+ 
+local s = 0
+local m = 0
+local h = 0
+ 
+local plr = game:GetService("Players").LocalPlayer
+local lastB = plr:WaitForChild("leaderstats")["Bounty/Honor"].Value
+ 
+while wait(1) do
+	s += 1
+	if s >= 60 then
+		s -= 60
+		m += 1
 	end
-	
-	function Tween(P1)
-		Distance = (P1.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
-		if Distance < 1000 then
-			Speed = 400
-		elseif Distance >= 1000 then
-			Speed = 250
-		end
-		game:GetService("TweenService"):Create(
-			game.Players.LocalPlayer.Character.HumanoidRootPart,
-			TweenInfo.new(Distance/Speed, Enum.EasingStyle.Linear),
-			{CFrame = P1}
-		):Play()
-		Clip = true
-		wait(Distance/Speed)
-		Clip = false
+	if m >= 60 then
+		m -= 60
+		h += 1
 	end
-
-spawn(function()
-while wait() do
-pcall(function()
-if _G.AutoFarmBounty then
-if not game:GetService("Players").LocalPlayer.Character:FindFirstChild("HasBuso") then
-game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Buso")
+	Time_2.Text = "Time Elapsed: "..h.."H "..m.."M "..s.."S"
+	local o = plr.leaderstats["Bounty/Honor"].Value - lastB
+	if o >= 0 then
+		BountyHunted.Text = "Bounty Hunted: "..o
+	end
 end
-end
-end)
-end
-end)
-
-local Delay = 1
-
-CastlePostoMansion = CFrame.new(-5084.8447265625, 316.48101806641, -3145.3752441406)
-MansiontoCastlePos = CFrame.new(-12464.596679688, 376.30590820312, -7567.2626953125)
-Castletophydra = CFrame.new(-5095.33984375, 316.48101806641, -3168.3134765625)
-HydratoCastle = CFrame.new(5741.869140625, 611.94750976562, -282.61154174805)
-spawn(function()
-while wait() do
-pcall(function()
-if _G.AutoFarmBounty then
-for i,v in pairs(game:GetService("Workspace").Characters:GetChildren()) do
-if v.Name ~= game.Players.LocalPlayer.Name then
-if v:WaitForChild("Humanoid").Health > 0 and (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v.HumanoidRootPart.Position).Magnitude <= 17000 then
-plyselecthunthelpold = v.Humanoid.Health
-repeat task.wait()
-NameTarget = v.Name
-if tostring(game.Players.LocalPlayer.Team) == "Pirates" then
-Tween(v.HumanoidRootPart.CFrame * CFrame.new(0,0,15))
-            elseif tostring(game.Players.LocalPlayer.Team) == "Marines" then
-if game.Players[NameTarget].Team ~= game.Players.LocalPlayer.Team then
-Tween(v.HumanoidRootPart.CFrame * CFrame.new(0,0,15))
-end
-end
-spawn(function()
-if (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 150 then
-    spawn(function()
-    Melee()
-    SY()
-    SC()
-    SZ()
-    SX()
-    wait(1)
-    Sword()
-    SZ()
-    SX()
-    wait(1)
-    BF()
-    SZ()
-    SX()
-    end)
-end
-end)
-v.HumanoidRootPart.CanCollide = false
-TargetSelectHunt = v.Humanoid
-until _G.AutoFarmBounty == false or v.Humanoid.Health == 0 or not v:FindFirstChild("HumanoidRootPart") or not v:FindFirstChild("Humanoid") or not v.Parent or NextplySelect == true
-NextplySelect = false
-StartCheckTarget = false
-end
-end
-end
-end
-end)
-end
-end)
-
-function Melee()
-for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
-    if v:IsA("Tool") then
-        if v.ToolTip == "Melee" then -- "Blox Fruit" , "Sword" , "Wear" , "Agility"
-            game.Players.LocalPlayer.Character.Humanoid:EquipTool(v)
-        end
-    end
-end
-end
-function Sword()
-    for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
-        if v:IsA("Tool") then
-            if v.ToolTip == "Sword" then -- "Blox Fruit" , "Sword" , "Wear" , "Agility"
-                game.Players.LocalPlayer.Character.Humanoid:EquipTool(v)
-            end
-        end
-    end
-    end
-    function BF()
-        for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
-            if v:IsA("Tool") then
-                if v.ToolTip == "Blox Fruit" then -- "Blox Fruit" , "Sword" , "Wear" , "Agility"
-                    game.Players.LocalPlayer.Character.Humanoid:EquipTool(v)
-                end
-            end
-        end
-        end
-
-        function SY()
-            game:GetService("VirtualInputManager"):SendKeyEvent(true,"Y",false,game)
-            game:GetService("VirtualInputManager"):SendKeyEvent(false,"Y",false,game)
-        end
-
-function SZ()
-    game:GetService("VirtualInputManager"):SendKeyEvent(true,"Z",false,game)
-    game:GetService("VirtualInputManager"):SendKeyEvent(false,"Z",false,game)
-end
-
-function SX()
-    game:GetService("VirtualInputManager"):SendKeyEvent(true,"X",false,game)
-    game:GetService("VirtualInputManager"):SendKeyEvent(false,"X",false,game)
-end
-
-function SC()
-    game:GetService("VirtualInputManager"):SendKeyEvent(true,"C",false,game)
-    game:GetService("VirtualInputManager"):SendKeyEvent(false,"C",false,game)
-end
-spawn(function()
-pcall(function()
-while task.wait() do
-if _G.AutoFarmBounty then
-game:GetService("Players").LocalPlayer.PlayerGui.Main.InCombat.Visible = false
-game:GetService("Players").LocalPlayer.PlayerGui.Main.SafeZone.Visible = false
-end
-end
-end)
-end)
-
-spawn(function()
-pcall(function()
-while wait() do
-if _G.AutoFarmBounty then
-if TargetSelectHunt ~= nil then
-if StartCheckTarget then
-wait(6.5)
-if TargetSelectHunt.Health == TargetSelectHunt.MaxHealth or TargetSelectHunt.Health >= plyselecthunthelpold then
-NextplySelect = true
-TargetSelectHunt = nil
-end
-end
-end
-end
-end
-end)
-end)
-
-spawn(function()
-pcall(function()
-while wait(.1) do
-if _G.AutoFarmBounty then
-if game:GetService("Players").LocalPlayer.PlayerGui.Main.PvpDisabled.Visible == true then
-game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("EnablePvp")
-end
-end
-end
-end)
-end)
-
-spawn(function()
-while wait() do
-if _G.AutoFarmBounty then
-pcall(function()
-wait(150)
-Hop()
-Hop()
-Hop()
-Hop()
-Hop()
-end)
-end
-end
-end)
